@@ -396,7 +396,7 @@ class SMSProcessor(Resource):
         db.session.add(notification)
         db.session.commit()
 
-api.add_resource(SMSProcessor, '/sms')
+#api.add_resource(SMSProcessor, '/sms')
 
 @app.route('/')
 def index():
