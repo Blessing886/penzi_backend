@@ -17,8 +17,8 @@ class User(db.Model):
         Enum('basic', 'details', 'completed', name='registration_stage'),
         default='basic'
     )
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     details = db.relationship('UserDetail', back_populates='user', uselist=False)
     match_requests = db.relationship('MatchRequest', backref='user', lazy=True)
@@ -40,7 +40,7 @@ class UserDetail(db.Model):
     ethnicity = db.Column(db.String(50))
     religion = db.Column(db.String(50))
     self_description = db.Column(db.Text)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     user = db.relationship('User', back_populates='details')
 
@@ -100,7 +100,7 @@ class Message(db.Model):
     recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     phone_number = db.Column(db.String(15))
     content = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
         return f'<Message {self.id} from {self.sender_id} to {self.recipient_id}>'
